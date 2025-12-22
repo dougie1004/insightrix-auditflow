@@ -4,9 +4,7 @@ import socketserver
 # ---------------------------------------------------------
 # 설정 영역
 # ---------------------------------------------------------
-# 1. 파일명을 auditflow_logo.png로 정확히 맞췄습니다.
 LOGO_FILE = "auditflow_logo.png"  
-# 2. 구글 폼 ID (보내주신 폼의 고유 ID입니다)
 FORM_ID = "1FAIpQLSdaceSg7sSHIbFXH9JLB06xQ5go0Kh-vubLm4E7xXt48kYX-w"
 PORT = 9000
 # ---------------------------------------------------------
@@ -33,25 +31,34 @@ html_content = f"""
         .container {{ max-width: 1100px; margin: 0 auto; padding: 0 24px; }}
         
         nav {{ 
-            padding: 15px 0; display: flex; justify-content: space-between; align-items: center; 
+            padding: 10px 0; display: flex; justify-content: space-between; align-items: center; 
             border-bottom: 1px solid var(--border); position: sticky; top: 0; 
             background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); z-index: 1000; 
         }}
-        /* 로고 크기 최적화 */
-        .logo-img {{ height: 50px; width: auto; display: block; }}
+
+        /* 로고 크기 조정을 완료했습니다 */
+        .logo-img {{ 
+            height: 100px;      /* 기존 50px에서 100px로 과감하게 키웠습니다. 너무 크면 80으로 줄이세요. */
+            width: auto; 
+            display: block; 
+            padding: 10px 0;
+        }}
         
         .hero {{ padding: 100px 0; text-align: center; background: linear-gradient(to bottom, var(--bg-light), #fff); }}
         .hero h1 {{ font-size: 3.2rem; font-weight: 800; color: var(--audit-blue); margin-bottom: 24px; line-height: 1.2; letter-spacing: -1px; }}
         .hero h1 span {{ color: var(--innovation-gold); }}
-        .hero p.mission {{ font-size: 1.25rem; color: var(--text-muted); max-width: 850px; margin: 0 auto 48px; }}
-        
-        .btn-primary {{ display: inline-block; background: var(--audit-blue); color: white; padding: 18px 48px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s; }}
-        .btn-primary:hover {{ transform: translateY(-3px); box-shadow: 0 10px 20px rgba(10, 25, 47, 0.15); }}
+        .hero p.mission {{ font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }}
 
-        .form-section {{ padding: 80px 0; background: var(--bg-light); border-radius: 40px; text-align: center; }}
-        .form-box {{ background: white; padding: 10px; border-radius: 24px; max-width: 800px; margin: 40px auto; box-shadow: 0 20px 40px rgba(0,0,0,0.05); overflow: hidden; }}
+        .btn-primary {{ 
+            background-color: var(--audit-blue); color: #fff; padding: 16px 32px; 
+            text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 1.1rem;
+            transition: 0.3s;
+        }}
+        .btn-primary:hover {{ background-color: #162c4a; }}
+
+        .form-section {{ padding: 100px 0; background-color: #fff; text-align: center; }}
+        .form-box {{ margin-top: 50px; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }}
         
-        /* 구글 폼 임베드 스타일 */
         iframe {{ width: 100%; min-height: 900px; border: none; }}
         
         footer {{ padding: 60px 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }}
@@ -85,16 +92,21 @@ html_content = f"""
 </section>
 
 <footer>
-    <p>© 2025 AuditFlow. Navigate Risks with AI. | dwlee75@gmail.com</p>
+    <p>© 2025 AuditFlow. Navigate Risks with AI. | insightrix1004@gmail.com</p>
 </footer>
 
 </body>
 </html>
 """
 
+# 파일 저장
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
-with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as httpd:
-    print(f"✅ 서버 실행 중: http://localhost:{PORT}")
-    httpd.serve_forever()
+# 서버 실행
+try:
+    with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as httpd:
+        print(f"✅ 인사이트릭스 AuditFlow 서버 실행 중: http://localhost:{PORT}")
+        httpd.serve_forever()
+except KeyboardInterrupt:
+    print("\n서버를 종료합니다.")
