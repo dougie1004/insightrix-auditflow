@@ -7,7 +7,7 @@ import urllib.parse
 # ---------------------------------------------------------
 LOGO_FILE = "auditflow_logo.png" 
 DIAGRAM_FILE = "diagram_image.png" 
-VIDEO_FILE = "Video Project.mp4" # 데모 영상 파일명
+VIDEO_FILE = "Video Project 1 1.mp4" # 데모 영상 파일명
 PORT = 9000
 # ---------------------------------------------------------
 
@@ -176,4 +176,5 @@ with open("index.html", "w", encoding="utf-8") as f:
 
 with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as httpd:
     print(f"🚀 Integrated Multilingual Page Running: http://localhost:{PORT}")
+
     httpd.serve_forever()
