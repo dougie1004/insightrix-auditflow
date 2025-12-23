@@ -7,7 +7,7 @@ import urllib.parse
 # ---------------------------------------------------------
 LOGO_FILE = "auditflow_logo.png" 
 DIAGRAM_FILE = "diagram_image.png" 
-VIDEO_FILE = "Video Project 1 1.mp4" # 데모 영상 파일명
+GIF_FILE = "auditflow_demo.gif" # 교체된 GIF 파일명
 PORT = 9000
 # ---------------------------------------------------------
 
@@ -35,16 +35,16 @@ html_content = f"""
         .lang-switch button {{ background: none; border: none; color: #fff; cursor: pointer; padding: 5px 12px; font-weight: bold; opacity: 0.6; transition: 0.3s; }}
         .lang-switch button.active {{ opacity: 1; border-bottom: 2px solid var(--innovation-gold); }}
 
-        /* Navigation - Logo 300px Left */
+        /* Navigation */
         nav {{ padding: 10px 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: #fff; z-index: 1000; }}
         .logo-img {{ height: 300px; width: auto; display: block; }} 
 
-        /* Hero Split Section - Video Auto Play */
+        /* Hero Split Section - GIF Integration */
         .hero-section {{ padding: 40px 0; background: var(--bg-light); border-radius: 0 0 40px 40px; }}
         .hero-flex {{ display: flex; align-items: center; gap: 40px; }}
         .hero-content {{ flex: 1; }}
-        .hero-video-box {{ flex: 1.2; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); background: #000; }}
-        video {{ width: 100%; display: block; }}
+        .hero-video-box {{ flex: 1.2; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); background: #fff; line-height: 0; }}
+        .demo-gif {{ width: 100%; height: auto; display: block; }}
         
         .hero-content h1 {{ font-size: 2.8rem; font-weight: 800; color: var(--audit-blue); margin-bottom: 20px; line-height: 1.2; letter-spacing: -1px; }}
         .hero-content h1 span {{ color: var(--innovation-gold); }}
@@ -88,10 +88,7 @@ html_content = f"""
             <a href="#apply" class="btn-primary" id="btn-apply-text">AuditFlow 구축 희망업체 신청하기</a>
         </div>
         <div class="hero-video-box">
-            <video autoplay muted loop playsinline>
-                <source src="{urllib.parse.quote(VIDEO_FILE)}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <img src="{urllib.parse.quote(GIF_FILE)}" alt="AuditFlow Demo GIF" class="demo-gif">
         </div>
     </div>
 </section>
@@ -175,6 +172,5 @@ with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
 with socketserver.TCPServer(("", PORT), http.server.SimpleHTTPRequestHandler) as httpd:
-    print(f"🚀 Integrated Multilingual Page Running: http://localhost:{PORT}")
-
+    print(f"🚀 GIF Version Multilingual Page Running: http://localhost:{PORT}")
     httpd.serve_forever()
